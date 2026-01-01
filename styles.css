@@ -1,0 +1,45 @@
+#mapdiv {
+	height: 100vh;
+}
+
+.popup-container {
+    width: 80vw;  /* 80% of the viewport width */
+    max-width: 300px;  /* Maximum width */
+    height: 60vh;  /* 60% of the viewport height */
+    max-height: 350px;  /* Maximum height */
+    padding: 10px;  /* Add some padding */
+    box-sizing: border-box;  /* Ensure padding is included in width/height */
+}
+
+
+.popup-form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.popup-label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.popup-input {
+    flex: 2;
+}
+
+.popup-button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-button {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.popup-button:last-child {
+    margin-right: 0;
+}
+.ui-autocomplete {
+    z-index: 10000000;
+}
