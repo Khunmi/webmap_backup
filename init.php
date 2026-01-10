@@ -10,7 +10,7 @@
             PDO::ATTR_EMULATE_PREPARES   => false
         ];
 
-        $config_path = '/home/kunmiade/config/db.php';
+        $config_path = 'home/kunmiade/config/db.php';
         $config = [];
         if (file_exists($config_path)) {
             $config = require $config_path;
