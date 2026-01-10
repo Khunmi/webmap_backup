@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First WebMap</title>
+    <title>CRUD Capable Webmap</title>
 
     <link rel="stylesheet" href="styles.css">
 
@@ -128,7 +128,7 @@
         </div>
     </div> -->
 
-        <div id="sidebar" class="sidebar collapsed">
+        <div id="sidebar" class="sidebar">
             <!-- Nav tabs -->
             <div class="sidebar-tabs">
                 <ul role="tablist">
@@ -163,7 +163,7 @@
                                 <select class="form-control" name="dma_id" id="dma_id">
                                     <option value=""></option>
                                     <option value="105">105</option>
-                                    <option value="911B">911B</option>
+                                    <option value="911B" selected>911B</option>
                                 </select>
                             </div>
                             <div class="col-xs-6">
@@ -559,13 +559,14 @@
 
         var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {maxZoom: 23,});
 
-        GoogleStreets.addTo(map);
+        Esri_WorldImagery.addTo(map);
 
         var sidebar = L.control.sidebar('sidebar', {
             position: 'left'
         });
 
         map.addControl(sidebar);
+        sidebar.open('home');
 
 
 
@@ -645,7 +646,7 @@
         });
 
         // MINIMAP
-        var miniMap = new L.Control.MiniMap(OpenTopoMap,{position:'bottomright', height: 120, width: 120}).addTo(map);
+        var miniMap = new L.Control.MiniMap(GoogleStreets,{position:'bottomright', height: 120, width: 120}).addTo(map);
 
         // SCALE
         L.control.scale({position:'bottomright', maxwidth: '300', imperial: false}).addTo(map);
@@ -1030,7 +1031,7 @@
 
                     <div class="popup-form-group">
                         <label class="control-label popup-label">Pipeline ID.</label>
-                        <input type="text" class="form-control popup-input text-center updatePipeline" value='${att.pipe_id}' name="pipe_id">
+                        <input type="text" class="form-control popup-input text-center updatePipeline" value='${att.pipe_id}' name="pipeline_id">
                     </div>
                     <div class="popup-form-group">
                         <label class="control-label popup-label">Category</label>
@@ -1042,7 +1043,7 @@
                     </div>
                     <div class="popup-form-group">
                         <label class="control-label popup-label">Length (m)</label>
-                        <input type="number" class="form-control popup-input text-center updatePipeline" value='${att.length}' name="length">
+                        <input type="number" class="form-control popup-input text-center updatePipeline" value='${att.length}' name="pipeline_length">
                     </div>
                     <div class="popup-form-group">
                         <label class="control-label popup-label">Location</label>
@@ -1166,13 +1167,14 @@
                 pipeline_material: $("#pipeline_material").val(),
                 pipeline_diameter: $("#pipeline_diameter").val(),
                 pipeline_dma_id: $("#pipeline_dma_id").val(),
+                pipeline_length: $("#length").val(),
                 pipeline_location: $("#pipeline_location").val(),
                 pipeline_geometry: $("#pipeline_geometry").val(),
                 request:'pipelines'}
 
-            console.log(pipelineData);
+            // console.log(pipelineData);
 
-            if(!pipelineData.pipeline_id || !pipelineData.pipeline_category || !pipelineData.pipeline_diameter || !pipelineData.pipeline_dma_id || !pipelineData.pipeline_material || !pipelineData.pipeline_location || !pipelineData.pipeline_geometry){
+            if(!pipelineData.pipeline_id || !pipelineData.pipeline_category || !pipelineData.pipeline_diameter || !pipelineData.pipeline_dma_id || !pipelineData.pipeline_length || !pipelineData.pipeline_material || !pipelineData.pipeline_location || !pipelineData.pipeline_geometry){
                 $('#pipeline_status').html('<p class="text-danger">Error: Please fill in all fields.</p>' );
                 return;
             } else {
@@ -1192,6 +1194,7 @@
                             $("#pipeline_category").val("")
                             $("#pipeline_diameter").val("")
                             $("#pipeline_dma_id").val("")
+                            $("#length").val("")
                             $("#pipeline_material").val("")
                             $("#pipeline_location").val("")
                             $("#pipeline_geometry").val("")
