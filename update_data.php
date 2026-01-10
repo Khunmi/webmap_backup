@@ -23,7 +23,7 @@
 				$check->execute([':account_no' => $account_no]);
 
 				if ($check->rowCount() > 0) {
-					echo "ERROR: Account Number already exists for another building. Please choose a new Account Numnber!";
+					echo "ERROR: Account Number already exists for another building. Please choose a new Account Number!";
 				} else {
 					$stmt = $pdo->prepare("UPDATE buildings SET account_no = :account_no, building_category = :building_category, building_storey = :building_storey, building_population = :building_population, building_location = :building_location, building_dma_id = :building_dma_id WHERE building_database_id = :building_database_id");
 					$stmt->execute([
